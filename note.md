@@ -8,4 +8,12 @@
 🎉 Copied project files
 Get started with: cd hono-typed-query
 Done in 48.70s.
+
+yarn add -D prisma
+docker-compose up -d
+yarn prisma init
+yarn add openapi-typescript
+yarn add -D typescript
+
+npx openapi-typescript openapi.yml --output src/types.ts
 ```
