@@ -1,8 +1,21 @@
+### boot hono
 ```
-npm install
-npm run dev
+yarn install
+yarn dev
 ```
 
+### prepare badckend
 ```
-open http://localhost:3000
+docker compose up -d
+npx prisma generate
+```
+
+### generate type from openapi
+```
+npx openapi-typescript openapi.yml --output src/types.ts
+```
+
+### generate typed sql
+```
+
 ```
