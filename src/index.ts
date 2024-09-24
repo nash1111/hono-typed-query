@@ -6,6 +6,7 @@ import { Console, Effect } from 'effect'
 import * as S from "@effect/schema/Schema";
 import { bearerAuth } from 'hono/bearer-auth';
 import { jwt } from 'hono/jwt';
+import { listUsersWithNoteCount } from '@prisma/client/sql';
 const prisma = new PrismaClient();
 
 
@@ -108,6 +109,12 @@ app.get('/users/:userId/notes', async (c) => {
   const userId = parseInt(c.req.param('userId'))
   const notes = await prisma.note.findMany({ where: { userId } })
   return c.json(notes)
+})
+
+app.get('/users/:userId', async (c) => {
+  const userId = parseInt(c.req.param('userId'))
+  const notesWIthCounts = await prisma.$queryRawTyped(listUsersWithNoteCount(userId))
+  return c.json(notesWIthCounts)
 })
 
 const port = 3000
