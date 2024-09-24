@@ -17,5 +17,5 @@ npx openapi-typescript openapi.yml --output src/types.ts
 
 ### generate typed sql
 ```
-
+npx prisma generate --sql
 ```
