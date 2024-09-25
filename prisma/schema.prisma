@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["typedSql"]
 }
 
@@ -9,7 +9,16 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
+  id    Int    @id @default(autoincrement())
   name  String
-  email String  @unique
+  email String @unique
+  notes Note[]
+}
+
+model Note {
+  id      Int    @id @default(autoincrement())
+  title   String
+  content String
+  userId  Int
+  user    User   @relation(fields: [userId], references: [id])
 }

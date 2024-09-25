@@ -18,6 +18,101 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+  /users/login:
+    post:
+      summary: User login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+      responses:
+        '200':
+          description: User logged in
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /notes:
+    post:
+      summary: Create a new note
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Note'
+      responses:
+        '200':
+          description: A note has been created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+  /notes/{id}:
+    get:
+      summary: Get a note by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A note has been retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+    patch:
+      summary: Update a note
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Note'
+      responses:
+        '200':
+          description: A note has been updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+    delete:
+      summary: Delete a note
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Note deleted
+  /users/{userId}/notes:
+    get:
+      summary: Get all notes for a user
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: All notes for the user have been retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Note'
 components:
   schemas:
     User:
@@ -30,3 +125,26 @@ components:
         email:
           type: string
           format: email
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Note'
+    UserLogin:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+    Note:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        content:
+          type: string
+        userId:
+          type: integer

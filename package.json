@@ -9,6 +9,7 @@
     "@prisma/client": "^5.19.1",
     "effect": "^3.8.3",
     "hono": "^4.6.2",
+    "jsonwebtoken": "^9.0.2",
     "openapi-typescript": "^7.4.1"
   },
   "devDependencies": {
